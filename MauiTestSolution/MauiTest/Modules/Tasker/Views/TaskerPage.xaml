@@ -1,0 +1,90 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:MauiTest.Converters"
+             x:Class="MauiTest.Modules.Tasker.Views.TaskerPage"
+             StyleClass="TaskerBKG"
+             Title="Tasker">
+
+    <!-- ColorConverter =< Class Crée pour pouvoir changer notre string en Type Color(class) -->
+    <ContentPage.Resources>
+        <converters:ColorConverter x:Key="ColorConverter"/>
+    </ContentPage.Resources>
+
+    <Grid Margin="15" RowDefinitions=".1*, .3*, .7*">
+        <!-- Title -->
+        <Label Text="My Task" StyleClass="DarkBlue, Header"/>
+        
+        <!-- Task Categories -->
+        <Grid Grid.Row="1" RowDefinitions=".2*, .8*">
+            <Label StyleClass="LightBlue, SubHeader" Text="CATEGORIES"/>
+            <CollectionView Grid.Row="1" ItemsSource="{Binding Categories}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Horizontal" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <!-- Entoure le box shadow de la Task -->
+                            <RoundRectangle StyleClass="TaskerRoundRectangle" />
+                            <VerticalStackLayout Padding="15" Spacing="10">
+                                <Label StyleClass="LightBlue"
+                                       Text="{Binding Pending, StringFormat='{0} Task'}"/>
+                                <Label StyleClass="DarkBlue, CardTitle"
+                                       Text="{Binding Name}"/>
+                                <ProgressBar Progress="{Binding Percentage}" ProgressColor="{Binding Color, Converter= {StaticResource ColorConverter}}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <!-- Todo's -->
+        <!-- 2 files de 20 et 80 percent -->
+        <Grid Grid.Row="2" RowDefinitions=".2*, .8*">
+            <Label StyleClass="LightBlue, SubHeader" Text="PENDING TASK"/>
+            <!-- ItemsUpdatingScrollMode va directement dans la dernier task qui a ete ajouté -->
+            <CollectionView Grid.Row="1" ItemsSource="{Binding Todos}" ItemsUpdatingScrollMode="KeepLastItemInView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="Transparent">
+                            <HorizontalStackLayout>
+                                <CheckBox x:Name="checkboxTask"
+                                          IsChecked="{Binding Completed}"
+                                          VerticalOptions="Center"
+                                          CheckedChanged="checkboxTask_CheckedChanged"
+                                          Color="{Binding TaskColor , Converter= {StaticResource ColorConverter}}"/>
+                                <Label Text="{Binding Name}" VerticalOptions="Center">
+                                    <!-- va etre a l'ecoute du checkbox et declancher une action selon sa value dans le layout  -->
+                                    <!-- Source: Id du checkbox  -->
+                                    <!-- path: la value de la propriete du checkbox qu'on veut -->
+                                    <!-- TargetType: Le type de control(ici Label) qu'on veut modifier -->
+                                    <!-- 
+                                        Value: changer le designe du control selon la value expecifie ici 
+                                        ex: quand checkbox est a true change le design
+                                    -->
+                                    <Label.Triggers>
+                                        <DataTrigger Binding="{Binding Source={x:Reference checkboxTask}, Path= IsChecked}"
+                                                     TargetType="Label"
+                                                     Value="True">
+                                            <Setter Property="TextDecorations"
+                                                    Value="Strikethrough"/>
+                                        </DataTrigger>
+
+                                    </Label.Triggers>
+                                </Label>
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <!-- Create New Task -->
+        <Button Grid.Row="2"
+                StyleClass="CircularButton"
+                Clicked="Button_Clicked"
+                Text="+" />
+    </Grid>
+   
+</ContentPage>

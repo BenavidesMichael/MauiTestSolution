@@ -1,0 +1,80 @@
+﻿<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Variables -->
+    <Color x:Key="darkBlue">#212B4F</Color>
+    <Color x:Key="lightBlue">#8A8BA6</Color>
+    <Color x:Key="bkgColor">#F8FAFF</Color>
+
+    <Shadow x:Key="shadowRectangleTask"
+            Brush="#CFD0D4"
+            Opacity="0.6"
+            Radius="15"
+            Offset="10, 15"/>
+
+    <!-- Styles -->
+    <Style Class="TaskerBKG" TargetType="ContentPage" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="{StaticResource bkgColor}" />
+    </Style>
+
+    <Style Class="DarkBlue" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoRegular"/>
+        <Setter Property="TextColor" Value="{StaticResource darkBlue}" />
+    </Style>
+
+    <Style Class="LightBlue" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoRegular"/>
+        <Setter Property="TextColor" Value="{StaticResource lightBlue}" />
+    </Style>
+
+    <Style Class="Header" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoRegular"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="Title"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <Style Class="SubHeader" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoRegular"/>
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <Style Class="CardTitle" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoRegular"/>
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+
+    <Style Class="TaskerRoundRectangle" TargetType="RoundRectangle">
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Fill" Value="white"/>
+        <Setter Property="WidthRequest" Value="200"/>
+        <Setter Property="Shadow" Value="{StaticResource shadowRectangleTask}" />
+    </Style>
+
+    <Style Class="TaskerEntry" TargetType="Entry">
+        <Setter Property="FontFamily" Value="RobotoRegular"/>
+        <Setter Property="FontSize" Value="Large"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource lightBlue}"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <EllipseGeometry x:Key="circle"
+                     Center="50,50"
+                     RadiusX="30"
+                     RadiusY="30"/>
+
+    <Style Class="CircularButton" TargetType="Button">
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="Large"/>
+        <Setter Property="HeightRequest" Value="100"/>
+        <Setter Property="WidthRequest" Value="100"/>
+        <Setter Property="VerticalOptions" Value="End"/>
+        <Setter Property="HorizontalOptions" Value="End"/>
+        <Setter Property="Clip" Value="{StaticResource circle}"/>
+    </Style>
+
+</ResourceDictionary>
