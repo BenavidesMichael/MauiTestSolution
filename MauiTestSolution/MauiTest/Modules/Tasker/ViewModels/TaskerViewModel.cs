@@ -108,7 +108,7 @@ public partial class TaskerViewModel
     [RelayCommand]
     public async Task AddTask()
     {
-        var queryParameters = new Dictionary<string, object>() 
+        var queryParameters = new Dictionary<string, object>()
         {
             { "Todos", Todos },
             { "Categories", Categories }
