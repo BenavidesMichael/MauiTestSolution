@@ -3,8 +3,8 @@
     x:Class="MauiTest.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pages="clr-namespace:MauiTest.Modules.Tasker.Views"
-    xmlns:home="clr-namespace:MauiTest.Views"
+    xmlns:tasker="clr-namespace:MauiTest.Modules.Tasker.Views"
+    xmlns:shop="clr-namespace:MauiTest.Modules.Shop.Views"
     FlyoutHeaderBehavior="CollapseOnScroll">
 
     <Shell.FlyoutHeader>
@@ -17,8 +17,8 @@
         </Grid>
     </Shell.FlyoutHeader>
 
-    <ShellContent Title="HOME" ContentTemplate="{DataTemplate home:MainPage}" Route="MainPage" />
-    <ShellContent Title="TASKER" ContentTemplate="{DataTemplate pages:TaskerPage}" Route="TaskerPage" />
+    <ShellContent Title="TASKER" ContentTemplate="{DataTemplate tasker:TaskerPage}" />
+    <ShellContent Title="SHOP" ContentTemplate="{DataTemplate shop:ProductPage}" />
 
 
 </Shell>

@@ -1,4 +1,6 @@
-﻿using MauiTest.Modules.Tasker.Models;
+﻿using CommunityToolkit.Mvvm.Input;
+using MauiTest.Modules.Tasker.Models;
+using MauiTest.Modules.Tasker.Views;
 using PropertyChanged;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -6,7 +8,7 @@ using System.Collections.Specialized;
 namespace MauiTest.Modules.Tasker.ViewModels;
 
 [AddINotifyPropertyChangedInterface]
-public class TaskerViewModel
+public partial class TaskerViewModel
 {
     public ObservableCollection<Category> Categories { get; set; }
     public ObservableCollection<Todo> Todos { get; set; }
@@ -101,4 +103,25 @@ public class TaskerViewModel
             tsk.TaskColor = catColor;
         }
     }
+
+
+    [RelayCommand]
+    public async Task AddTask()
+    {
+        var queryParameters = new Dictionary<string, object>() 
+        {
+            { "Todos", Todos },
+            { "Categories", Categories }
+        };
+
+        await Shell.Current.GoToAsync($"{nameof(NewTaskPage)}",
+                                           true,
+                                           queryParameters);
+
+        UpdateData();
+    }
+
+
+
+
 }

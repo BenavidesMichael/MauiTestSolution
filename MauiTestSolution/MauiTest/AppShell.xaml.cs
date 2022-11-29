@@ -1,10 +1,21 @@
-﻿namespace MauiTest
+﻿using MauiTest.Modules.Shop.Views;
+using MauiTest.Modules.Tasker.Views;
+
+namespace MauiTest
 {
     public partial class AppShell : Shell
     {
         public AppShell()
         {
             InitializeComponent();
+            this.RouterShell();
+        }
+
+        private void RouterShell()
+        {
+            Routing.RegisterRoute(nameof(TaskerPage), typeof(TaskerPage));
+            Routing.RegisterRoute(nameof(NewTaskPage), typeof(NewTaskPage));
+            Routing.RegisterRoute(nameof(ProductPage), typeof(ProductPage));
         }
     }
 }

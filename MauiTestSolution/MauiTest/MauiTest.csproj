@@ -55,14 +55,21 @@
 
 	<ItemGroup>
 	  <Folder Include="Models\" />
+	  <Folder Include="Modules\Shop\Models\" />
 	  <Folder Include="Validations\" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Maui" Version="3.0.0" />
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
 	  <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+	  <PackageReference Include="System.ObjectModel" Version="4.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Modules\Shop\Views\ProductPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\TaskerStyle.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

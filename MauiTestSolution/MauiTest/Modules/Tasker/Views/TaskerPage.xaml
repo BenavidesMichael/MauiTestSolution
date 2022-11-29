@@ -83,7 +83,7 @@
         <!-- Create New Task -->
         <Button Grid.Row="2"
                 StyleClass="CircularButton"
-                Clicked="Button_Clicked"
+                Command="{Binding AddTaskCommand}"
                 Text="+" />
     </Grid>
    

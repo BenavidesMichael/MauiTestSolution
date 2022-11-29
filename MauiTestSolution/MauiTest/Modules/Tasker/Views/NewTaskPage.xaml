@@ -2,12 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiTest.Modules.Tasker.Views.NewTaskPage"
-             Title="New Task">
+             xmlns:vm ="clr-namespace:MauiTest.Modules.Tasker.ViewModels"
+             Title="{Binding Title}">
 
     <Grid RowDefinitions=".2*, .7*, .1*">
         <Entry StyleClass="TaskerEntry"
                Placeholder="Enter New Task"
                Text="{Binding NewTask}"/>
+        
         <CollectionView Grid.Row="1" Margin="15" ItemsSource="{Binding Categories}">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout HorizontalItemSpacing="5"
@@ -32,8 +34,8 @@
                                HorizontalOptions="CenterAndExpand"
                                Spacing="15"
                                VerticalOptions="Center">
-            <Button CornerRadius="15" Text="Category +" Clicked="AddNewCategory"/>
-            <Button CornerRadius="15" Text="Task +" Clicked="AddNewTask"/>
+            <Button CornerRadius="15" Text="Category +" Command="{Binding AddNewCategoryCommand}" />
+            <Button CornerRadius="15" Text="Task +" Command="{Binding AddNewTaskCommand}" />
         </HorizontalStackLayout>
     </Grid>
 </ContentPage>

@@ -1,5 +1,9 @@
-﻿namespace MauiTest.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public class BaseViewModel
+namespace MauiTest.ViewModels;
+
+public partial class BaseViewModel : ObservableObject
 {
+    [ObservableProperty]
+    string _title;
 }
