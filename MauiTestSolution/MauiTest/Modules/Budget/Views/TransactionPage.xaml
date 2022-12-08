@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiTest.Modules.Budget.Views.TransactionPage"
+             Title="{Binding Title}">
+
+    <Grid RowDefinitions=".15*, .15*, .70*">
+        <RoundRectangle Grid.RowSpan="2" StyleClass="TopRectangle"/>
+        <VerticalStackLayout StyleClass="Header">
+            <Label StyleClass="HeaderSubTitle" Text="New Transaction"/>
+        </VerticalStackLayout>
+
+        <Grid Grid.Row="1" 
+              Grid.RowSpan="2" 
+              StyleClass="BalanceGrid">
+            <RoundRectangle StyleClass="BalanceRectangle"/>
+
+            <VerticalStackLayout StyleClass="Padding25" Spacing="10">
+                <Label Text="Transaction Name"/>
+                <Frame StyleClass="FrameBorder">
+                    <Entry Text="{Binding Transaction.Name}" />
+                </Frame>
+
+                <Label StyleClass="MarginT15" Text="Amount"/>
+                <Frame StyleClass="FrameBorder">
+                    <Entry Keyboard="Numeric" Text="{Binding Transaction.Amount}" VerticalOptions="Center" />
+                </Frame>
+
+                <Label StyleClass="MarginT15" Text="Transaction Date"/>
+                <Frame StyleClass="FrameBorder">
+                    <DatePicker Date="{Binding Transaction.OperationDate}"/>
+                </Frame>
+
+                <HorizontalStackLayout>
+                    <CheckBox IsChecked="{Binding Transaction.IsIncome}" />
+                    <Label Text="Is Income ?" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <Button StyleClass="MarginT15" Text="Save" Command="{Binding SaveTransactionCommand}"/>
+                <Button StyleClass="MarginT15, RedControl" Text="Cancel"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

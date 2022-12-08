@@ -1,12 +1,18 @@
-﻿using PropertyChanged;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace MauiTest.Modules.Tasker.Models;
 
-[AddINotifyPropertyChangedInterface]
-public class Todo
+public partial class Todo : ObservableObject
 {
-    public string Name { get; set; }
-    public bool Completed { get; set; }
-    public string TaskColor { get; set; }
-    public int CategorieId { get; set; }
+    [ObservableProperty]
+    string name;
+
+    [ObservableProperty]
+    bool completed;
+
+    [ObservableProperty]
+    string taskColor;
+
+    [ObservableProperty]
+    int categorieId;
 }

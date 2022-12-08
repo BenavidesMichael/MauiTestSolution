@@ -1,14 +1,24 @@
-﻿using PropertyChanged;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace MauiTest.Modules.Tasker.Models;
 
-[AddINotifyPropertyChangedInterface]
-public class Category
+public partial class Category : ObservableObject
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Color { get; set; }
-    public int Pending { get; set; }
-    public float Percentage { get; set; }
-    public bool IsSelected { get; set; }
+    [ObservableProperty]
+    int id;
+
+    [ObservableProperty]
+    string name;
+
+    [ObservableProperty]
+    string color;
+
+    [ObservableProperty]
+    int pending;
+
+    [ObservableProperty]
+    float percentage;
+
+    [ObservableProperty]
+    bool isSelected;
 }

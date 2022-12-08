@@ -9,6 +9,8 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
                 <ResourceDictionary Source="Resources/Styles/TaskerStyle.xaml" />
+                <ResourceDictionary Source="Resources/Styles/ProductDataTemplate.xaml" />
+                <ResourceDictionary Source="Resources/Styles/BudgetStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

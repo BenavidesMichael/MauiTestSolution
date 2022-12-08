@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:tasker="clr-namespace:MauiTest.Modules.Tasker.Views"
     xmlns:shop="clr-namespace:MauiTest.Modules.Shop.Views"
-    FlyoutHeaderBehavior="CollapseOnScroll">
+    xmlns:Budget="clr-namespace:MauiTest.Modules.Budget.Views"
+    FlyoutHeaderBehavior="Scroll">
 
     <Shell.FlyoutHeader>
         <Grid HeightRequest="150">
@@ -19,6 +20,5 @@
 
     <ShellContent Title="TASKER" ContentTemplate="{DataTemplate tasker:TaskerPage}" />
     <ShellContent Title="SHOP" ContentTemplate="{DataTemplate shop:ProductPage}" />
-
-
+    <ShellContent Title="BUDGET" ContentTemplate="{DataTemplate Budget:BudgetMenuPage}" /> 
 </Shell>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sfChart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             xmlns:converter ="clr-namespace:MauiTest.Converters"
+             x:Class="MauiTest.Modules.Budget.Views.StatisticsPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <!-- reference converter -->
+    <ContentPage.Resources>
+        <converter:AmountToCurrencyConverter x:Key="AmountConverter"/>
+        <converter:AmountColorConverter x:Key="AmountColorConverter"/>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions=".15*,.15*,.30*,.40*">
+        <RoundRectangle Grid.RowSpan="2" StyleClass="TopRectangle"/>
+        <VerticalStackLayout StyleClass="Header">
+            <Label StyleClass="HeaderSubTitle" Text="Statistics"/>
+        </VerticalStackLayout>
+        <Grid Grid.Row="1"
+              Grid.RowSpan="2"
+              StyleClass="BalanceGrid">
+            <RoundRectangle StyleClass="BalanceRectangle"/>
+
+            <sfChart:SfCartesianChart Margin="5,5,20,5">
+                <sfChart:SfCartesianChart.XAxes>
+                    <sfChart:CategoryAxis/>
+                </sfChart:SfCartesianChart.XAxes>
+
+                <sfChart:SfCartesianChart.YAxes>
+                    <sfChart:NumericalAxis/>
+                </sfChart:SfCartesianChart.YAxes>
+
+                <sfChart:SplineAreaSeries ItemsSource="{Binding Summaries}"
+                                          XBindingPath="ShownDate"
+                                          YBindingPath="TransactionTotal"/>
+            </sfChart:SfCartesianChart>
+        </Grid>
+
+        <Grid Grid.Row="3"
+              RowDefinitions=".1*, .9*"
+              StyleClass="Margin15">
+            <Label Text="Tp Spending"/>
+            <CollectionView Grid.Row="1" EmptyView="No Data" ItemsSource="{Binding SpendingList}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="15" Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.EmptyViewTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Label StyleClass="NoDataText" Text="No Data Found, Click on the + button to add a new Transaction"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.EmptyViewTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="*,*"
+                              RowDefinitions="*,*">
+                            <Label StyleClass="StrongMediumTitle" Text="{Binding Name}"/>
+                            <Label Grid.Row="1" StyleClass="SmallFont" Text="{Binding HumainDate, StringFormat='{0:dd/MM/yyyy}'}"/>
+                            <!--Hide Element-->
+                            <Label x:Name="lblIsIncome" IsVisible="False" Text="{Binding IsIncome}"/>
+                            <Label Grid.RowSpan="2" 
+                                       Grid.Column="1"
+                                       StyleClass="ListAmount"
+                                       FontAttributes="Bold"
+                                       Text="{Binding Amount, Converter={StaticResource AmountConverter}, ConverterParameter={x:Reference lblIsIncome}}"
+                                       TextColor="{Binding Amount, Converter={StaticResource AmountColorConverter}, ConverterParameter={x:Reference lblIsIncome}}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Grid>
+</ContentPage>

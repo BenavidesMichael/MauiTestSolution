@@ -1,23 +1,30 @@
-﻿using MauiTest.Modules.Shop.Models;
+﻿using CommunityToolkit.Mvvm.Input;
+using MauiTest.Modules.Shop.Models;
 using MauiTest.ViewModels;
 using System.Collections.ObjectModel;
 
 namespace MauiTest.Modules.Shop.ViewModels
 {
-    public class ProductViewModel : BaseViewModel
+    public partial class ProductViewModel : BaseViewModel
     {
 
-        public ObservableCollection<Product> Products { get; set; }
+        public ObservableCollection<Product> Products { get; set; } = new();
+
+        public bool IsRefreshing { get; set; }
 
         public ProductViewModel()
         {
             Title = "Products";
-            this.seedProduct();
+            this.Refresh();
         }
 
-        void seedProduct()
+        [RelayCommand]
+        private async void Refresh(int lastIndex = 0)
         {
-            Products = new ObservableCollection<Product>
+            try
+            {
+                int numberOfItemsPerPage = 10;
+                var items = new ObservableCollection<Product>
             {
                 new Product
                 {
@@ -430,7 +437,33 @@ namespace MauiTest.Modules.Shop.ViewModels
                     Stock = 9
                 },
             };
+
+                var pageItems = items.Skip(lastIndex)
+                                     .Take(numberOfItemsPerPage);
+
+                foreach (var item in pageItems)
+                {
+                    Products.Add(item);
+                }
+
+            }
+            finally
+            {
+                IsRefreshing = false;
+            }
         }
-    
+
+        [RelayCommand]
+        private async void ThresholdReached()
+        {
+            Refresh(Products.Count);
+        }
+
+
+        [RelayCommand]
+        private void Delete(Product product)
+        {
+            Products.Remove(product);
+        }
     }
 }

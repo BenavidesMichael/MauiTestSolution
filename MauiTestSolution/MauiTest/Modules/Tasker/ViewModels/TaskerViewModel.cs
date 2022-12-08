@@ -1,86 +1,36 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using MauiTest.Modules.Tasker.Models;
+using MauiTest.Modules.Tasker.Services;
 using MauiTest.Modules.Tasker.Views;
-using PropertyChanged;
+using MauiTest.ViewModels;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 
 namespace MauiTest.Modules.Tasker.ViewModels;
 
-[AddINotifyPropertyChangedInterface]
-public partial class TaskerViewModel
+public partial class TaskerViewModel : BaseViewModel
 {
-    public ObservableCollection<Category> Categories { get; set; }
-    public ObservableCollection<Todo> Todos { get; set; }
+    ITaskerService _taskerService;
+    public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
+    public ObservableCollection<Todo> Todos { get; set; } = new ObservableCollection<Todo>();
 
-    public TaskerViewModel()
+
+    public TaskerViewModel(ITaskerService taskerService)
     {
+        Title = "Tasker";
+        _taskerService = taskerService;
         Seeddata();
-        Todos.CollectionChanged += todosUpdateListCollectionChanged;
-    }
-
-    private void todosUpdateListCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        UpdateData();
     }
 
     private void Seeddata()
     {
-        Categories = new ObservableCollection<Category>()
-        {
-            new Category()
-            {
-                Id = 1,
-                Name= ".Net Maui Test",
-                Color = "#CF14DF"
-            },
-            new Category()
-            {
-                Id = 2,
-                Name= ".Net 7",
-                Color = "#df6f14"
-            },
-            new Category()
-            {
-                Id = 3,
-                Name= "Ef core",
-                Color = "#14df80"
-            }
-        };
+        var todos = _taskerService.GetAllTodos();
+        var categories = _taskerService.GetAllCategories();
 
-        Todos = new ObservableCollection<Todo>()
-        {
-            new Todo()
-            {
-                Name = "CollectionView tamplate",
-                Completed= false,
-                CategorieId= 1,
-            },
-            new Todo()
-            {
-                Name = "Task 2",
-                Completed= true,
-                CategorieId= 2,
-            },
-            new Todo()
-            {
-                Name = "Task 3",
-                Completed= false,
-                CategorieId= 3,
-            },
-            new Todo()
-            {
-                Name = "Task 4",
-                Completed= false,
-                CategorieId= 1,
-            },
-            new Todo()
-            {
-                Name = "Task 5",
-                Completed= false,
-                CategorieId= 2,
-            }
-        };
+        foreach (var item in categories)
+            Categories.Add(item);
+
+        foreach (var item in todos)
+            Todos.Add(item);
 
         UpdateData();
     }
@@ -103,7 +53,6 @@ public partial class TaskerViewModel
             tsk.TaskColor = catColor;
         }
     }
-
 
     [RelayCommand]
     public async Task AddTask()
