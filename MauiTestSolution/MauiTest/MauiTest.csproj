@@ -72,9 +72,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Modules\Budget\Views\BudgetMenuPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Modules\Budget\Views\BudgetPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

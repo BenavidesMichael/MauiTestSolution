@@ -33,7 +33,7 @@ namespace MauiTest.Modules.Budget.ViewModels
             GetDataTransactions();
         }
 
-        void GetDataTransactions()
+        public void GetDataTransactions()
         {
             Balance = 0;
             Income = 0;
@@ -57,7 +57,6 @@ namespace MauiTest.Modules.Budget.ViewModels
 
             Balance = Income - Expenses;
         }
-
 
         #region Commands
         [RelayCommand]

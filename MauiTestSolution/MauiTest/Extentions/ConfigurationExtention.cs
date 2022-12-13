@@ -28,7 +28,6 @@ public static class ConfigurationExtention
         builder.Services.AddSingleton<ProductViewModel>();
         builder.Services.AddSingleton<ProductPage>();
         //Budget
-        builder.Services.AddSingleton<BudgetMenuPage>();
         builder.Services.AddSingleton<BudgetPage>();
         builder.Services.AddSingleton<BudgetViewModel>();
         builder.Services.AddSingleton<TransactionPage>();

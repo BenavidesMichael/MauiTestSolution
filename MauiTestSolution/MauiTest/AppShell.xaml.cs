@@ -21,7 +21,6 @@ namespace MauiTest
             Routing.RegisterRoute(nameof(BudgetPage), typeof(BudgetPage));
             Routing.RegisterRoute(nameof(StatisticsPage), typeof(StatisticsPage));
             Routing.RegisterRoute(nameof(TransactionPage), typeof(TransactionPage));
-            Routing.RegisterRoute(nameof(BudgetMenuPage), typeof(BudgetMenuPage));
         }
     }
 }

@@ -18,7 +18,13 @@
         </Grid>
     </Shell.FlyoutHeader>
 
+    <FlyoutItem FlyoutDisplayOptions="AsSingleItem" Title="BUDGET">
+        <Tab>
+            <ShellContent Title="DashBoard" ContentTemplate="{DataTemplate Budget:BudgetPage}" />
+            <ShellContent Title="Statistics" ContentTemplate="{DataTemplate Budget:StatisticsPage}" />
+        </Tab>
+    </FlyoutItem>
+
     <ShellContent Title="TASKER" ContentTemplate="{DataTemplate tasker:TaskerPage}" />
     <ShellContent Title="SHOP" ContentTemplate="{DataTemplate shop:ProductPage}" />
-    <ShellContent Title="BUDGET" ContentTemplate="{DataTemplate Budget:BudgetMenuPage}" /> 
 </Shell>
